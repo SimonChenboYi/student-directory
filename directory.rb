@@ -13,20 +13,20 @@ def input_students
     puts "Please enter the cohort of the student"
 
     #convert to symbol
-    cohort = gets.chomp.to_sym
+    cohort = gets.delete("\n").to_sym
     # set up default value
     cohort = :november if cohort.empty?
 
     puts "Please enter the hobby of the student"
-    hobby = gets.chomp
+    hobby = gets.delete("\n")
     hobby = '???' if hobby.empty?
 
     puts "Please enter the Country of birth of the student"
-    country_of_birth = gets.chomp
+    country_of_birth = gets.delete("\n")
     country_of_birth = '???' if country_of_birth.empty?
 
     puts "Please enter the height of the student"
-    height = gets.chomp
+    height = gets.delete("\n")
     height = '???' if height.empty?
 
     students << { name: name, cohort: cohort, hobby: hobby,
@@ -36,7 +36,7 @@ def input_students
     # get another name from user
     puts "Please enter the names of the students"
     puts "To finish, just hit return twice"
-    name = gets.chomp
+    name = gets.delete("\n")
   end
   # return the array of students
   students
@@ -55,19 +55,19 @@ def update_list(students)
   puts "To finish update, just hit return twice"
 
   # update according to the index, key and updated value
-  index = gets.chomp
+  index = gets.delete("\n")
 
   until index.empty?
     puts "Please enter the category you want to update"
-    key = gets.chomp.to_sym
+    key = gets.delete("\n").to_sym
     # check whether the input key is valid,otherwise ask user input agian
     while students[index.to_i][key].nil?
       puts "input does not match any exsiting category, please re-enter"
-      key = gets.chomp.to_sym
+      key = gets.delete("\n").to_sym
     end
     # update value
     puts "Please enter the value you want to update"
-    value = gets.chomp
+    value = gets.delete("\n")
     # if the current value is a symbol then convert the updated value to symbol
     value = value.to_sym if students[index.to_i][key].is_a?(Symbol)
     students[index.to_i][key] = value
@@ -79,7 +79,7 @@ def update_list(students)
     puts "Please enter index need to update"
     puts "To finish update, just hit return twice"
 
-    index = gets.chomp
+    index = gets.delete("\n")
   end
 end
 

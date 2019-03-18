@@ -89,26 +89,24 @@ def print_header
   puts "-------------"
 end
 
+# Use map to get the cohort list and iterate over it to print grouped students
 def print(students)
-  puts "Please enter the first letter of name or just hit return to print all "
-  # get user input about print choice
-  specific_letter = gets.chomp
+  cohorts = []
+  students.map do |student|
+    cohorts << student[:cohort] unless cohorts.include?(student[:cohort])
+  end
 
-  # while loop the students array
-  index = 0
-  while index < students.size
-    # use if statement to accomodate user choice on printing
-    if (specific_letter.empty? || students[index][:name][0] == specific_letter) && students[index][:name].size < 12
-
-    # Print addtional infomation of the students
-    puts "#{index + 1}: #{students[index][:name]}".center(20) +
-      "(#{students[index][:cohort]} cohort, height: #{students[index][:height]})".center(35) +
-      "from #{students[index][:country_of_birth]}".center(15) +
-      "likes #{students[index][:hobby]}"
-    end
-    index += 1
+  cohorts.map do |cohort|
+    students.map { |student| puts student if student[:cohort] == cohort }
   end
 end
+
+# To print  sorted lsit, an alternative way is use sort_by method
+#  and then print the sorted student lists:
+
+# def print(students)
+# puts students.sort_by{|student| student[:cohort]}
+# end
 
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"

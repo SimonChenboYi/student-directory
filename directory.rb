@@ -24,8 +24,13 @@ def print_header
 end
 
 def print(students)
+  puts "Please enter the initial letter of names to print or just hit return to print all "
+  specific_letter = gets.chomp
+
   students.each_with_index do |student,index|
+    if specific_letter.empty? || student[:name][0] == specific_letter
     puts "#{index + 1}: #{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 

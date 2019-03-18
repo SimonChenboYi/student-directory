@@ -1,17 +1,22 @@
-# Put students in an array
-students = [
-  { name: "Dr. Hannibal Lecter", cohort: :november },
-  { name: "Darth Vader", cohort: :november },
-  { name: "Nurse Ratched", cohort: :november },
-  { name: "Michael Corleone", cohort: :november },
-  { name: "Alex DeLarge", cohort: :november },
-  { name: "The Wicked Witch of the West", cohort: :november },
-  { name: "Terminator", cohort: :november },
-  { name: "Freddy Krueger", cohort: :november },
-  { name: "The Joker", cohort: :november },
-  { name: "Joffrey Baratheon", cohort: :november },
-  { name: "Norman Bates", cohort: :november }
-]
+# Define method to ask user input for student's name
+def input_students
+  puts "Please enter the names of the students"
+  puts "To finish, just hit return twice"
+  # creat an empty array
+  students = []
+  # get the fitst name
+  name = gets.chomp
+  # while (loop) the name is not empty, repeat this code
+  while !name.empty? do
+    # add the student hash to the array
+    students << {name: name, cohort: :november}
+    puts "Now we have #{students.count} students"
+    # get another name from user
+    name = gets.chomp
+  end
+  # return the array of students
+  students
+end
 # define methods for print header, names and total number
 def print_header
   puts "The students of Villains Academy"
@@ -27,6 +32,8 @@ end
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
+# Ask user input by invoking the input_students methods, assign the output to a variable
+students = input_students
 # Print header, students and total number by invoking the pre-defined methods
 print_header
 print(students)

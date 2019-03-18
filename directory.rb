@@ -31,7 +31,7 @@ def input_students
 
     students << { name: name, cohort: cohort, hobby: hobby,
                   country_of_birth: country_of_birth, height: height }
-    puts "Now we have #{students.count} students"
+    puts "Now we have #{students.count} #{students.count > 1 ? 'students' : 'student'}"
 
     # get another name from user
     puts "Please enter the names of the students"

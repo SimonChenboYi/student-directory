@@ -26,11 +26,12 @@ end
 def print(students)
   puts "Please enter the initial letter of names to print or just hit return to print all "
   specific_letter = gets.chomp
-
-  students.each_with_index do |student,index|
-    if (specific_letter.empty? || student[:name][0] == specific_letter) && student[:name].size < 12
-    puts "#{index + 1}: #{student[:name]} (#{student[:cohort]} cohort)"
+  index = 0
+  while index < students.size
+    if (specific_letter.empty? || students[index][:name][0] == specific_letter) && students[index][:name].size < 12
+    puts "#{index + 1}: #{students[index][:name]} (#{students[index][:cohort]} cohort)"
     end
+    index += 1
   end
 end
 

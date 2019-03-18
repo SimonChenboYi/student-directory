@@ -49,10 +49,10 @@ def print(students)
     if (specific_letter.empty? || students[index][:name][0] == specific_letter) && students[index][:name].size < 12
 
     # Print addtional infomation of the students
-    puts "#{index + 1}: #{students[index][:name]}" +
-      " (#{students[index][:cohort]} cohort, height: #{students[index][:height]})" +
-      "from #{students[index][:country_of_birth]}" +
-      " likes #{students[index][:hobby]}"
+    puts "#{index + 1}: #{students[index][:name]}".center(20) +
+      "(#{students[index][:cohort]} cohort, height: #{students[index][:height]})".center(35) +
+      "from #{students[index][:country_of_birth]}".center(15) +
+      "likes #{students[index][:hobby]}"
     end
     index += 1
   end

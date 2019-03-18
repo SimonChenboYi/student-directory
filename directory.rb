@@ -119,6 +119,8 @@ students = input_students
 update_list(students)
 
 # Print header, students and total number by invoking the pre-defined methods
-print_header
-print(students)
-print_footer(students)
+if students.length > 0
+  print_header
+  print(students)
+  print_footer(students)
+end

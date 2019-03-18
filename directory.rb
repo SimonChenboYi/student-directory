@@ -28,7 +28,7 @@ def print(students)
   specific_letter = gets.chomp
 
   students.each_with_index do |student,index|
-    if specific_letter.empty? || student[:name][0] == specific_letter
+    if (specific_letter.empty? || student[:name][0] == specific_letter) && student[:name].size < 12
     puts "#{index + 1}: #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end

@@ -32,9 +32,37 @@ end
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
-# Ask user input by invoking the input_students methods, assign the output to a variable
-students = input_students
-# Print header, students and total number by invoking the pre-defined methods
-print_header
-print(students)
-print_footer(students)
+
+# Adding an interactive menu
+def interactive_menu
+  students = []
+  loop do
+    # 1. print the menu and ask the user what to do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    # 2. read the input and save it into a variable
+    selection = gets.chomp
+    # 3. do what the user has asked
+    case selection
+    when "1"
+      # input the students
+      students = input_students
+    when "2"
+      #show the input_students
+      print_header
+      print(students)
+      print_footer(students)
+    when "9"
+      # terminate the program
+      exit
+    else
+      # handle the wrong input
+      puts "I don't know what you meant,try agian"
+    end
+    # 4. repeat the loop
+  end
+end
+
+#call interactive_menu method instead of asking for the list of users straight away
+interactive_menu

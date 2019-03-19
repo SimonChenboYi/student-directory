@@ -88,7 +88,7 @@ end
 # try load the file from commandline
 def try_load_students
   filename = ARGV.first
-  return if filename.nil? # get out method and run as without this method
+  filename = "students.csv" if filename.nil? # load "students.csv" by default if no file is given on startup
   if File.exist?(filename)
     load_students(filename)
     puts "Loaded #{students.count} from #{filename}"

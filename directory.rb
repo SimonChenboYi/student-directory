@@ -5,7 +5,7 @@
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  name = gets.chomp
+  name = STDIN.gets.chomp
 
   # loop when the name is not empty, repeat this code
   until name.empty?
@@ -13,7 +13,7 @@ def input_students
     @students << { name: name, cohort: :november }
     puts "Now we have #{@students.count} students"
     # get another name from user
-    name = gets.chomp
+    name = STDIN.gets.chomp
   end
   # @students has been processed withint method, no need to return the value
 end
@@ -64,9 +64,11 @@ def save_students
   file.close
 end
 
-def load_students
+# filename as an argument of method and set default value
+# load_students will excute with default vaule as argument
+def load_students(filename = "students.csv")
   # option 4. load the list from students.csv
-  file = File.open("students.csv", "r")
+  file = File.open(filename, "r")
   file.readlines.each do |line| # readlines
     name, cohort = line.chomp.split(",") # parallel assignment
     @students << { name: name, cohort: cohort.to_sym }
@@ -74,6 +76,18 @@ def load_students
   file.close
 end
 
+# try load the file from commandline
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil? # get out method and run as without this method
+  if File.exist?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry #{filename} doesn't exist"
+    exit
+  end
+end
 
 def process(selection)
   case selection
@@ -99,9 +113,12 @@ def interactive_menu
     # 1. print the menu and ask the user what to do
     print_menu
     # 2&3. read the input and pass in as an argument,do what the user has asked
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
     # 4. repeat by looping
   end
 end
+
+# invoke the method to try_to_load from command  line
+try_load_students
 # call interactive menu method instead of asking for the list straight away
 interactive_menu

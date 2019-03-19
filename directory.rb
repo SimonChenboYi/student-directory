@@ -1,6 +1,15 @@
 # Declare instance variable to be recognised across methods
 @students = []
 
+#  Define getter and setter
+def students
+  @students
+end
+
+def students=(value)
+  @students = value
+end
+
 # Option 1. Ask user input for student's name
 def input_students
   puts "Please enter the names of the students"
@@ -10,8 +19,8 @@ def input_students
   # loop when the name is not empty, repeat this code
   until name.empty?
     # add the student hash to the array
-    @students << { name: name, cohort: :november }
-    puts "Now we have #{@students.count} students"
+    students << { name: name, cohort: :november }
+    puts "Now we have #{students.count} students"
     # get another name from user
     name = STDIN.gets.chomp
   end
@@ -31,7 +40,7 @@ def print
 end
 
 def print_footer
-  puts "Overall, we have #{@students.count} great students"
+  puts "Overall, we have #{students.count} great students"
 end
 
 # Adding an interactive menu/Refactor
@@ -71,7 +80,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line| # readlines
     name, cohort = line.chomp.split(",") # parallel assignment
-    @students << { name: name, cohort: cohort.to_sym }
+    students << { name: name, cohort: cohort.to_sym }
   end
   file.close
 end
@@ -82,7 +91,7 @@ def try_load_students
   return if filename.nil? # get out method and run as without this method
   if File.exist?(filename)
     load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
+    puts "Loaded #{students.count} from #{filename}"
   else
     puts "Sorry #{filename} doesn't exist"
     exit

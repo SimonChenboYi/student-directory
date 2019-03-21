@@ -75,6 +75,7 @@ def save_students
     file.puts [student[:name], student[:cohort]].join(",")
   end
   file.close
+  puts "Student list is saved in students.csv "
 end
 
 def load_students(filename = "students.csv")
@@ -83,6 +84,7 @@ def load_students(filename = "students.csv")
     name, cohort = line.chomp.split(",") # parallel assignment
     students << { name: name, cohort: cohort.to_sym }
   end
+  puts "Loaded #{students.count} from #{filename}"
   file.close
 end
 
@@ -90,7 +92,6 @@ def try_load_students
   filename = ARGV.first || "students.csv" # "students.csv" by default
   if File.exist?(filename)
     load_students(filename)
-    puts "Loaded #{students.count} from #{filename}"
   else
     puts "Sorry #{filename} doesn't exist"
     exit

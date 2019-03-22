@@ -20,3 +20,4 @@ ruby directory.rb filename
     * see commit message on step8 branch for each exercise
   * Exercises in Step 14 on step14 branch
     * see commit message on step14 branch for each exercise
+    * My blog on another Ruby Quine solution https://medium.com/@ycb0001/my-first-ruby-quine-with-12-steps-207658c43c2b

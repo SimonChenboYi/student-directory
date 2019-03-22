@@ -2,7 +2,7 @@
 @menu = [ "1. Input the students",
           "2. Show the students",
           "3. Save the list to file",
-          "4. Load the list from students.csv",
+          "4. Load the list from file",
           "9. Exit"]
 
 # getters and setters
@@ -77,11 +77,11 @@ def save_students
   puts 'input the filename or hit enter to save to "students.csv" as default'
   filename = input_filename
 
-  file = File.open(filename, "w")
-  students.each do |student|
-    file.puts [student[:name], student[:cohort]].join(",")
+  File.open(filename, "w") do |file|
+    students.each do |student|
+      file.puts [student[:name], student[:cohort]].join(",")
+    end
   end
-  file.close
   puts "Student list is saved in #{filename}"
 end
 
@@ -91,13 +91,13 @@ def load_students(filename = "students.csv")
     filename = input_filename
   end
 
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",") # parallel assignment
-    students << { name: name, cohort: cohort.to_sym }
-  end
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(",") # parallel assignment
+      students << { name: name, cohort: cohort.to_sym }
+    end
   puts "Loaded #{students.count} from #{filename}"
-  file.close
+  end
 end
 
 def try_load_students

@@ -1,3 +1,5 @@
+require 'csv'
+
 @students = []
 @menu = [ "1. Input the students",
           "2. Show the students",
@@ -77,9 +79,10 @@ def save_students
   puts 'input the filename or hit enter to save to "students.csv" as default'
   filename = input_filename
 
-  File.open(filename, "w") do |file|
+  # Use CSV library
+  CSV.open(filename, "w") do |csv|
     students.each do |student|
-      file.puts [student[:name], student[:cohort]].join(",")
+      csv << [student[:name], student[:cohort]]
     end
   end
   puts "Student list is saved in #{filename}"
@@ -91,13 +94,11 @@ def load_students(filename = "students.csv")
     filename = input_filename
   end
 
-  File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-      name, cohort = line.chomp.split(",") # parallel assignment
-      students << { name: name, cohort: cohort.to_sym }
-    end
-  puts "Loaded #{students.count} from #{filename}"
+  CSV.foreach(filename) do |row|
+    name, cohort = row
+    students << { name: name, cohort: cohort.to_sym }
   end
+  puts "Loaded #{students.count} from #{filename}"
 end
 
 def try_load_students

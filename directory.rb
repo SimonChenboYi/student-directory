@@ -1,7 +1,7 @@
 @students = []
 @menu = [ "1. Input the students",
           "2. Show the students",
-          "3. Save the list to students.csv",
+          "3. Save the list to file",
           "4. Load the list from students.csv",
           "9. Exit"]
 
@@ -68,17 +68,29 @@ def show_students
   print_footer
 end
 
-def save_students
-  file = File.open("students.csv", "w")
+def input_filename
+  filename = STDIN.gets.chomp
+  filename.empty? ?  "students.csv" : filename
+end
 
+def save_students
+  puts 'input the filename or hit enter to save to "students.csv" as default'
+  filename = input_filename
+
+  file = File.open(filename, "w")
   students.each do |student|
     file.puts [student[:name], student[:cohort]].join(",")
   end
   file.close
-  puts "Student list is saved in students.csv "
+  puts "Student list is saved in #{filename}"
 end
 
 def load_students(filename = "students.csv")
+  if filename == "students.csv"
+    puts "Input the filename to load list or hit enter to load from students.csv"
+    filename = input_filename
+  end
+
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",") # parallel assignment
